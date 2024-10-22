@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  # MariaDB (latest version)
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ./mariadb-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+  # PHP 8.3 with Apache
+  php:
+    image: php:8.3-apache
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - "8080:80"
+    depends_on:
+      - mariadb
+  # phpMyAdmin
+  phpmyadmin:
+    image: phpmyadmin:latest
+    environment:
+      PMA_HOST: mariadb
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "8081:80"
+    depends_on:
+      - mariadb
+  # Node.js 18 LTS
+  node:
+    image: node:18
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    stdin_open: true
+    tty: true
