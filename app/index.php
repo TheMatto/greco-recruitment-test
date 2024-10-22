@@ -1,16 +1,33 @@
-<!DOCTYPE html>
-<html lang="sl">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
 
-    <meta name="description" content="Backend Engineer Recruitment Test">
-    <meta name="author" content="Matic Jan">
+function route() {
+    $requestUri = strtok($_SERVER['REQUEST_URI'], '?');
+    $requestMethod = $_SERVER['REQUEST_METHOD'];
+
+    if ($requestMethod !== 'GET') {
+        return false;
+    }
     
-    <title>Naslov strani</title>
-</head>
-<body>
-    <h1>Hello</h1>
-</body>
-</html>
+    if ($requestUri === '/' || $requestUri === '') {
+        require __DIR__ . '/templates/home.php';
+
+        return true;
+    } else if (str_starts_with($requestUri, '/api')) {
+        $file = __DIR__ . "$requestUri.php";
+        if (file_exists($file)) {
+            require $file;
+
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+if (!route()) {
+    http_response_code(404);
+    
+    require __DIR__ . '/templates/404.php';
+}

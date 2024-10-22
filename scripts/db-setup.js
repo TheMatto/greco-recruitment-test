@@ -1,9 +1,10 @@
-const fs = require('fs');
-const mysql = require('mysql2/promise');
-const xml2js = require('xml2js');
-const chalk = require('chalk');
+import { config } from 'dotenv';
+import fs from 'fs';
+import mysql from 'mysql2/promise';
+import xml2js from 'xml2js';
+import chalk from 'chalk';
 
-require('dotenv').config();
+config();
 
 const createConnection = async () => {
   try {

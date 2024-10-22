@@ -14,9 +14,11 @@ services:
       - "3306:3306"
   # PHP 8.3 with Apache
   php:
-    image: php:8.3-apache
+    build:
+      context: .
+      dockerfile: Dockerfile.php-apache
     volumes:
-      - ./app:/var/www/html
+      - ./:/var/www/html
     ports:
       - "8080:80"
     depends_on:
@@ -37,5 +39,8 @@ services:
     volumes:
       - ./:/usr/src/app
     working_dir: /usr/src/app
+    entrypoint: /bin/sh
+    ports:
+      - "5173:5173"
     stdin_open: true
     tty: true

@@ -1,3 +1,4 @@
 .env
-mariadb-data/
-node_modules/
+/mariadb-data/
+/node_modules/
+/vendor/

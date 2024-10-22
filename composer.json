@@ -1,0 +1,13 @@
+{
+    "name": "maticjan/recruitment-test",
+    "description": "Backend Engineer Recruitment Test",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Matic Jan"
+        }
+    ],
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
