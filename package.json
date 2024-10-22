@@ -4,7 +4,13 @@
     "description": "Backend Engineer Recruitment Test",
     "main": "index.js",
     "scripts": {
-      "db:setup": "node scripts/db-setup.js"
+        "db:setup": "node scripts/db-setup.js"
     },
-    "author": "Matic Jan"
-  }
+    "author": "Matic Jan",
+    "dependencies": {
+        "chalk": "^4.1.2",
+        "dotenv": "^16.4.5",
+        "mysql2": "^3.11.3",
+        "xml2js": "^0.6.2"
+    }
+}
