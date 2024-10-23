@@ -36,7 +36,6 @@
       <button class="button">Show</button>
     </div>
   </form>
-
   <div v-if="loading" class="loading">Loading...</div>
   <div v-show="sites.length" class="closest-sites">
     <h2>Results:</h2>
