@@ -2,3 +2,4 @@
 /mariadb-data/
 /node_modules/
 /vendor/
+/app/dist/

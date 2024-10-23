@@ -5,7 +5,8 @@
     "description": "Backend Engineer Recruitment Test",
     "scripts": {
         "db:setup": "node scripts/db-setup.js",
-        "dev": "vite"
+        "dev": "vite",
+        "build": "vite build"
     },
     "author": "Matic Jan",
     "dependencies": {

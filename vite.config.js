@@ -10,6 +10,8 @@ export default defineConfig({
     },
   },
   build: {
+    assetsDir: '',
+    manifest: true,
     outDir: 'app/dist',
     emptyOutDir: true,
     rollupOptions: {

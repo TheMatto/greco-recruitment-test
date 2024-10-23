@@ -1,4 +1,8 @@
 <?php
+require_once '../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
 function route() {
     $requestUri = strtok($_SERVER['REQUEST_URI'], '?');
