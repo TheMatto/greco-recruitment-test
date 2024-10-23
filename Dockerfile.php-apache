@@ -1,10 +1,20 @@
 FROM php:8.3-apache
 
+# Copy VirtualHost configuration
 COPY vhost.conf /etc/apache2/sites-available/000-default.conf
 
-RUN docker-php-ext-install pdo pdo_mysql
+# Update package lists & install necessary packages and PHP extensions
+RUN apt-get update && apt-get install -y \
+    libzip-dev \
+    zip \
+    git && \
+    docker-php-ext-install pdo pdo_mysql zip
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+# Enable Apache mods
 RUN a2enmod rewrite headers
 
+# Restart Apache service
 RUN service apache2 restart
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
