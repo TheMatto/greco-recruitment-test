@@ -1,0 +1,38 @@
+$breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+);
+
+$content-max-widths: (
+    sm: 540px,
+    md: 720px,
+    lg: 950px,
+    xl: 1140px
+);
+
+$content-paddings-x: (
+    xs: 15px,
+    sm: 18px,
+    md: 20px,
+    lg: 30px,
+    xl: 30px
+);
+
+$gutters: (
+    xs: 15px,
+    sm: 18px,
+    md: 20px,
+    lg: 20px,
+    xl: 20px
+);
+
+$blue: #007BFF;
+$gray: #CCCCCC;
+
+$text-dark: #404040;
+$text-light: #FFFFFF;
+
+$font-primary: 'Lato', sans-serif;

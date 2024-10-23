@@ -1,0 +1,9 @@
+@use '../basics/variables' as *;
+
+body {
+    margin: 0;
+    background: #FFF;
+    color: $text-dark;
+    font-family: $font-primary;
+    font-style: normal;
+}

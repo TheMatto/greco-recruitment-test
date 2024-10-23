@@ -17,7 +17,9 @@
     <script type="module" src="http://localhost:5173/@vite/client"></script>
 </head>
 <body>
-    <div id="app"></div>
+    <div class="container">
+        <div id="app"></div>
+    </div>
     <script type="module" src="http://localhost:5173/app/resources/js/index.js"></script>
 </body>
 </html>

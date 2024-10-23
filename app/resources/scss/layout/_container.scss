@@ -1,0 +1,41 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '../basics/variables' as *;
+@use '../basics/mixins' as *;
+
+.container,
+.container-fluid {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: map.get($content-paddings-x, 'xs') !important;
+    padding-left: map.get($content-paddings-x, 'xs') !important;
+    box-sizing: border-box !important;
+    @each $breakpoint, $value in $breakpoints {
+        @include breakpoint-up($breakpoint) {
+            padding-right: map.get($content-paddings-x, $breakpoint) !important;
+            padding-left: map.get($content-paddings-x, $breakpoint) !important;
+        }
+    }
+    &.xs-no-padding {
+        @include breakpoint-down(sm) {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+    }
+}
+
+@each $breakpoint, $max-width in $content-max-widths {
+    .container {
+        @include breakpoint-up($breakpoint) {
+            max-width: $max-width !important;
+            box-sizing: content-box !important;
+        }
+    }
+    .fluid-#{$breakpoint} {
+        @include breakpoint-down($breakpoint) {
+            max-width: 100% !important;
+            width: 100% !important;
+        }
+    }
+}

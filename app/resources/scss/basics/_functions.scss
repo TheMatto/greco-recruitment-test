@@ -1,0 +1,14 @@
+@use 'sass:string';
+@use 'sass:color';
+
+@function to-rgb($color) {
+    @return string.unquote("rgb(#{color.channel($color, 'red')}, #{color.channel($color, 'green')}, #{color.channel($color, 'blue')})");
+}
+
+@function to-rgba($color, $opacity) {
+    @return string.unquote("rgb(#{color.channel($color, 'red')}, #{color.channel($color, 'green')}, #{color.channel($color, 'blue')}, #{$opacity})");
+}
+
+@function darken($color, $amount) {
+    @return color.adjust($color, $lightness: -$amount);
+}
