@@ -1,7 +1,7 @@
 <template>
   <h1>Find nearest sites</h1>
   <form class="form" @submit.prevent="submit(values)" novalidate>
-    <div v-show="manualEntry" class="input" :class="{ error: errors.lat }">
+    <div v-show="manualEntry" class="input half" :class="{ error: errors.lat }">
       <label>Lat</label>
       <input
         v-model="values.lat"
@@ -9,7 +9,7 @@
         @focus="errors.lat = false"
       >
     </div>
-    <div v-show="manualEntry" class="input" :class="{ error: errors.lon }">
+    <div v-show="manualEntry" class="input half" :class="{ error: errors.lon }">
       <label>Lon</label>
       <input
         v-model="values.lon"

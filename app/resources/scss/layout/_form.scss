@@ -1,17 +1,28 @@
 @use '../basics/variables' as *;
 @use '../basics/functions' as *;
+@use '../basics/mixins' as *;
 
 $disabled-border: #CED4DA;
 $disabled-background: #E9ECEF;
 $disabled-color: #6C757D;
 
 form.form {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
     .input {
         margin-bottom: 10px;
+        flex: 0 0 100%;
         label {
             display: block;
             margin-bottom: 3px;
             font-weight: 600;
+        }
+        &.half {
+            flex-basis: calc(50% - 10px);
+            @include breakpoint-down(sm) {
+                flex-basis: 100%;
+            }
         }
         input[type="text"] {
             width: 100%;

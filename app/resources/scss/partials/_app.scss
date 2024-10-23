@@ -16,6 +16,7 @@
             padding: 12px 15px;
             position: relative;
             overflow: hidden;
+            padding-right: 55px;
             .name {
                 font-weight: 900;
                 margin-bottom: 10px;
@@ -31,12 +32,12 @@
                     display: block;
                     position: absolute;
                     top: 50%;
-                    right: 0;
+                    right: -50px;
                     transform: translate(0, -50%) rotate(-45deg);
                     background: $green;
                     color: $text-light;
                     padding: 3px 5px;
-                    width: 120px;
+                    width: 200px;
                     text-align: center;
                     font-size: 12px;
                     font-weight: 700;
