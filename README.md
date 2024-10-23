@@ -45,10 +45,10 @@
    ```bash
    npm run dev
    ```
-For production, build the assets using:
+   For production, build the assets using:
    ```bash
    npm run build
    ```
-Make sure to set the APP_ENV variable in the .env file accordingly, depending on whether you are in development (APP_ENV=development) or production (APP_ENV=production).
+   *Make sure to set the APP_ENV variable in the .env file accordingly, depending on whether you are in development (APP_ENV=development) or production (APP_ENV=production).*
 
 8. Access the application in your browser at [http://localhost:8080](http://localhost:8080) and PHPMyAdmin at [http://localhost:8081](http://localhost:8081).
