@@ -4,26 +4,38 @@ header('Content-Type: application/json');
 
 $pdo = require_once 'database.php';
 
-if (!isset($_GET['lat']) || !isset($_GET['lon'])) {
+if (!isset($_GET['lon']) || !isset($_GET['lat'])) {
     die('err');
 }
 
-$latitude = $_GET['lat'];
 $longitude = $_GET['lon'];
+$latitude = $_GET['lat'];
+$radius = 500;
 
-$sql = "SELECT s.*,
+$latMin = $latitude - ($radius / 111);
+$latMax = $latitude + ($radius / 111);
+$lonMin = $longitude - ($radius / (111 * cos(deg2rad($latitude))));
+$lonMax = $longitude + ($radius / (111 * cos(deg2rad($latitude))));
+
+$sql = "SELECT s.id, s.site,
     CONCAT(a.first_name, ' ', a.last_name) AS agent_full_name,
-    (6371 * acos(cos(radians(:latitude)) * cos(radians(latitude)) * cos(radians(longitude) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(latitude)))) AS distance 
+    ST_Distance_Sphere(POINT(:longitude, :latitude), s.location) AS distance
     FROM sites s
     JOIN agents a ON s.agent_id = a.id
-    ORDER BY distance 
+    WHERE ST_X(s.location) BETWEEN :lonmin AND :lonmax
+        AND ST_Y(s.location) BETWEEN :latmin AND :latmax
+    ORDER BY distance
     LIMIT 5
 ";
 
 $stmt = $pdo->prepare($sql);
 
-$stmt->bindParam(':latitude', $latitude);
 $stmt->bindParam(':longitude', $longitude);
+$stmt->bindParam(':latitude', $latitude);
+$stmt->bindParam(':lonmin', $lonMin);
+$stmt->bindParam(':lonmax', $lonMax);
+$stmt->bindParam(':latmin', $latMin);
+$stmt->bindParam(':latmax', $latMax);
 
 $stmt->execute();
 

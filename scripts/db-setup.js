@@ -46,10 +46,10 @@ const createSitesTable = async (connection) => {
     CREATE TABLE IF NOT EXISTS sites (
       id INT AUTO_INCREMENT PRIMARY KEY,
       site VARCHAR(255) NOT NULL,
-      latitude DECIMAL(10, 8) NOT NULL,
-      longitude DECIMAL(11, 8) NOT NULL,
+      location POINT NOT NULL,
       agent_id INT,
-      FOREIGN KEY (agent_id) REFERENCES agents(id) ON DELETE SET NULL
+      FOREIGN KEY (agent_id) REFERENCES agents(id) ON DELETE SET NULL,
+      SPATIAL INDEX (location)
     );
   `;
 
@@ -117,16 +117,16 @@ const fillTables = async (firstNames, lastNames, sites, connection) => {
 
       const insertAgentPromise = connection.query(agentQuery, [firstName, lastName]);
 
-      const siteName = site.site[0]; 
-      const latitude = parseFloat(site.latitude[0]);
+      const siteName = site.site[0];
       const longitude = parseFloat(site.longitude[0]);
+      const latitude = parseFloat(site.latitude[0]);
   
       const siteQuery = `
-        INSERT INTO sites (site, latitude, longitude, agent_id)
-        VALUES (?, ?, ?, LAST_INSERT_ID())
+        INSERT INTO sites (site, location, agent_id)
+        VALUES (?, POINT(?, ?), LAST_INSERT_ID())
       `;
 
-      const insertSitePromise = connection.query(siteQuery, [siteName, latitude, longitude]);
+      const insertSitePromise = connection.query(siteQuery, [siteName, longitude, latitude]);
   
       return Promise.all([insertAgentPromise, insertSitePromise]);
     });
